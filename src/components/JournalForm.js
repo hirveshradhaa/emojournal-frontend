@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 // Use env var if set, else fallback to Render URL
@@ -9,6 +9,12 @@ export default function JournalForm() {
   const [entry, setEntry] = useState("");
   const [response, setResponse] = useState(null);
   const [history, setHistory] = useState([]);
+
+  // Load history automatically when component mounts
+  useEffect(() => {
+    loadHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
